@@ -14,7 +14,7 @@ import java.util.Optional;
 public class AdminAPI {
 
     @Autowired
-    private ManagerUserService managerUserServ;
+    private ManagerUserService managerUserServices;
 
     @GetMapping("/")
     public String hello() {
@@ -24,7 +24,7 @@ public class AdminAPI {
     @PostMapping("/acount")
     public Map<String, Object> create (@RequestBody User user){
         Map<String, Object> result = new HashMap<String, Object>();
-        User u = managerUserServ.Create(user);
+        User u = managerUserServices.Create(user);
         result.put("user", u);
         return result;
     };
@@ -32,7 +32,7 @@ public class AdminAPI {
     @GetMapping("/acount/id}")
     public Map<String, Object> select (@PathVariable("id")  Long id){
         Map<String, Object> result = new HashMap<String, Object>();
-        Optional<User> u = managerUserServ.FindUserById(id);
+        Optional<User> u = managerUserServices.FindUserById(id);
         result.put("user", u);
         return result;
     };
@@ -40,7 +40,7 @@ public class AdminAPI {
     @PutMapping("/acount")
     public Map<String, Object> edit (@RequestBody User user){
         Map<String, Object> result = new HashMap<String, Object>();
-        User u = managerUserServ.Create(user);
+        User u = managerUserServices.Create(user);
         result.put("user", u);
         return result;
     };
@@ -49,7 +49,7 @@ public class AdminAPI {
     public Map<String, Object> delete (@PathVariable("id") Long id){
         Map<String, Object> result = new HashMap<String, Object>();
         try {
-            managerUserServ.Delete(id);
+            managerUserServices.Delete(id);
             result.put("mesager", "Xóa người dùng thành công!");
         } catch (Exception e) {
             result.put("mesager", "Xóa người dùng thất bại!");
