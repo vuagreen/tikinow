@@ -11,4 +11,8 @@ public class AdminAPI {
     public String hello() {
         return "Hello Admin";
     }
+    @GetMapping("/abc")
+    public String hello2() {
+        return "Hello Admin";
+    }
 }
