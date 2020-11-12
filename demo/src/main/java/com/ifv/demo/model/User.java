@@ -1,5 +1,6 @@
 package com.ifv.demo.model;
 
+import Dto.UserDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,10 +9,32 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@SuppressWarnings("serial")
+@SqlResultSetMappings( {
+		@SqlResultSetMapping (
+				name="userManager",
+				classes = {
+						@ConstructorResult (
+								targetClass = UserDto.class,
+								columns = {
+										@ColumnResult(name="id", type = long.class),
+										@ColumnResult(name="username", type = String.class),
+										@ColumnResult(name="full_name", type = String.class),
+										@ColumnResult(name="address", type = String.class),
+										@ColumnResult(name="gender", type = String.class),
+										@ColumnResult(name="email", type = String.class),
+										@ColumnResult(name="phone_number", type = String.class),
+										@ColumnResult(name="birth_day", type = LocalDate.class),
+								}
+						)}
+		),
+} )
 
 @Entity
 @Data
 public class User {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

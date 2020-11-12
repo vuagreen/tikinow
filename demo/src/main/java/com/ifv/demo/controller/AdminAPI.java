@@ -5,9 +5,8 @@ import com.ifv.demo.service.ManagerUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @RestController
 @RequestMapping("/admin")
@@ -37,8 +36,20 @@ public class AdminAPI {
         return result;
     };
 
+    @GetMapping("/acount")
+    public Map<String, Object> getAll (
+            @RequestParam (required = false) String username,
+            @RequestParam (required = false) String full_name,
+            @RequestParam (required = false) String address,
+            @RequestParam (required = false) String gender,
+            @RequestParam (required = false) LocalDate birth_day
+    ){
+
+        return  managerUserServices.GetAllUser(username, full_name, address, gender, birth_day);
+    };
+
     @PutMapping("/acount")
-    public Map<String, Object> edit (@RequestBody User user){
+    public Map<String, Object> Edit (@RequestBody User user){
         Map<String, Object> result = new HashMap<String, Object>();
         User u = managerUserServices.Create(user);
         result.put("user", u);
